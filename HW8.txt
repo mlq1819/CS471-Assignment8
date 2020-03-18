@@ -2,13 +2,13 @@ Michael Quinn
 DON'T FORGET TO TAR THIS THIS TIME
 1. Pg. 237 CYU 8, 9 and 11
 #8: Why is the distinction between mutable and immutable values important in the implementation of a language with a reference model of variables?
-A mutable value can change, or mutate; an immutable value cannot. This is important within languages because most languages make use of mutable values, which are generally supposed to change; additionally, these languages allow for assigning an immutable value to mutable variables, but will not allow the reverse. Therefore, tracking which variables are mutable and which are immutable is important. Some variables cannot be changed, or at least cannot be changed in certain circumstances, so tracking which are which is very important to allow programs written in the language to work properly.
+	A mutable value can change, or mutate; an immutable value cannot. This is important within languages because most languages make use of mutable values, which are generally supposed to change; additionally, these languages allow for assigning an immutable value to mutable variables, but will not allow the reverse. Therefore, tracking which variables are mutable and which are immutable is important. Some variables cannot be changed, or at least cannot be changed in certain circumstances, so tracking which are which is very important to allow programs written in the language to work properly.
 
 #9: Define orthogonality in the context of programming language design.
-Orthogonality is the measure to which various language features may be used in logical and sensible combinations with one another. For instance, I would describe Prolog as more orthogonal than Java, specifically regarding variable typing, anyways.
+	Orthogonality is the measure to which various language features may be used in logical and sensible combinations with one another. For instance, I would describe Prolog as more orthogonal than Java, specifically regarding variable typing, anyways.
 
 #10: What is the difference between a statement and an expression? What does it mean for a language to be expression-oriented?
-Expressions are blocks of code that evaluate, generally through operators, to produce a value, and generally produce no "side-effects"; statements are blocks of code that are executed in order to produce such "side-effects", and generally do not return useful values. An effect is a "side-effect" if it affects computation in any way other than returning a value.
+	Expressions are blocks of code that evaluate, generally through operators, to produce a value, and generally produce no "side-effects"; statements are blocks of code that are executed in order to produce such "side-effects", and generally do not return useful values. An effect is a "side-effect" if it affects computation in any way other than returning a value.
 
 
 2. Evaluate following program fragment in C:
@@ -45,4 +45,15 @@ int b = (1) >= 0;						|		a=2			b=?
 int b = 1 >= 0;							|		a=2			b=?
 int b = 1;								|		a=2			b=?
 1;										|		a=2			b=1
+
+
+3. C++ and Java loops are often written with empty bodies by placing all side effects into the tests, such as in the following two examples:
+	i = 0;
+	while (a[i++] != 0);
+
+	for (i = 0; a[i] != 0; i++);
+Are these loops equivalent? Explain.
+	No; functionally, each loop continuously runs the expression "a[i]", and stops once that expression returns 0; however, the first loop has the "i" variable in a larger scope than the second loop, in which "i" only holds meaning during the loop itself; the first loop allows later code to reference "i" such that "a[i]==0", while the second loop doesn't.
+	That said, both loops call the same code; the first just gives more options to code down the line by preserving more information. That is not, however, considered equivalent.
+
 
