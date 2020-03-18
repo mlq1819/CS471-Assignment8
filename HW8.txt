@@ -117,3 +117,9 @@ evaluation of arguments.
 	All discrete data types are also scalar data types, but discrete data can be incremented and decremented using a preexisting "unit" that is defined by the type itself.
 
 
+6. Page 342 cyu 27: What is duck typing? What is its connection to polymorphism? In what languages does it appear?
+	Quack! Am I a duck? Duck typing would say yes, because I just quacked. But if it asked me to fly, I would no longer be a duck, and it would produce an error. Duck typing assumes that any given object is of the type it is expecting until it asks it to do something that object cannot do.
+	Duck typing is very useful for polymorphism, as it effectively ignores type checking until it is absolutely needed, such as when an operation is performed on an object that has requirements for it; like a factory where one step is to attach two parts together, even if the parts aren't what they are supposed to be the factory will still work with them until there is a step where they can't be attached the way they are supposed to. Duck typing increases polymorphism by assuming the correct type until an operation can't be performed on an object.
+	Duck typing is the bread and butter of Prolog; but it also appears in Objective C, Swift, Python, and Ruby.
+
+
