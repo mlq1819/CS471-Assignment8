@@ -10,3 +10,39 @@ Orthogonality is the measure to which various language features may be used in l
 #10: What is the difference between a statement and an expression? What does it mean for a language to be expression-oriented?
 Expressions are blocks of code that evaluate, generally through operators, to produce a value, and generally produce no "side-effects"; statements are blocks of code that are executed in order to produce such "side-effects", and generally do not return useful values. An effect is a "side-effect" if it affects computation in any way other than returning a value.
 
+
+2. Evaluate following program fragment in C:
+	int a = 0;      
+	int b = (a++ || ++a) >= (a++ && ++a);
+	printf( "%d %d", a, b );
+In the table below show each evaluation step  and include the value of a and b.  Finally, display the output.
+Remember that in Java, C, and C++, && and || are both short circuit operators which are always evaluated left to right.
+Assume all side effects occur immediately. 
+The '++' and '--' operators have higher precedence than '+' . The '+', additive operator, has higher precedence than '&&' or '||'. The '=' operator has lowest precedence.
+
+a. Assume that, wherever there is an option, operands are evaluated left to right:
+
+int b = (a++ || ++a) >= (a++ && ++a);	|		a=0			b=?
+int b = (0 || ++a) >= (a++ && ++a);		|		a=1			b=?
+int b = (0 || 2) >= (a++ && ++a);		|		a=2			b=?
+int b = (1) >= (a++ && ++a);			|		a=2			b=?
+int b = 1 >= (a++ && ++a);				|		a=2			b=?
+int b = 1 >= (2 && ++a);				|		a=3			b=?
+int b = 1 >= (2 && 4);					|		a=4			b=?
+int b = 1 >= (1);						|		a=4			b=?
+int b = 1 >= 1;							|		a=4			b=?
+int b = 1;								|		a=4			b=?
+1;										|		a=4			b=1
+
+b. Assume that, wherever there is an option, operands are evaluated right to left:
+
+int b = (a++ || ++a) >= (a++ && ++a);	|		a=0			b=?
+int b = (a++ || ++a) >= (0 && ++a);		|		a=1			b=?
+int b = (a++ || ++a) >= (0);			|		a=1			b=?
+int b = (a++ || ++a) >= 0;				|		a=1			b=?
+int b = (1 || ++a) >= 0;				|		a=2			b=?
+int b = (1) >= 0;						|		a=2			b=?
+int b = 1 >= 0;							|		a=2			b=?
+int b = 1;								|		a=2			b=?
+1;										|		a=2			b=1
+
