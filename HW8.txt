@@ -1,5 +1,8 @@
 Michael Quinn
-DON'T FORGET TO TAR THIS THIS TIME
+
+This isn't tar'd because the assignment document specifically says to "SUBMIT a txt." and that "CODE FILES MUST be tar'd." Because there are no code files, I am submitting a raw txt.
+
+
 1. Pg. 237 CYU 8, 9 and 11
 #8: Why is the distinction between mutable and immutable values important in the implementation of a language with a reference model of variables?
 	A mutable value can change, or mutate; an immutable value cannot. This is important within languages because most languages make use of mutable values, which are generally supposed to change; additionally, these languages allow for assigning an immutable value to mutable variables, but will not allow the reverse. Therefore, tracking which variables are mutable and which are immutable is important. Some variables cannot be changed, or at least cannot be changed in certain circumstances, so tracking which are which is very important to allow programs written in the language to work properly.
@@ -167,5 +170,17 @@ Briefly explain the behavior of the compiler.  Will *ip ever have the value 3 af
 	The compiler will complain about assignment from vp because void pointers are a very broad and can contain point to any type of data, so it wants the user to be aware of this and explicitly tell it what it is supposed to be assigning to, as mistakes can be easily made otherwise. Regarding assigning from ip or dp to the other, it will also cause problems as doubles and ints are stored in different ways, so converting a pointer doesn't actually change the data stored, just how it's interpreted, which in the case of switching from an int or double pointer to the other results in inaccurate data.
 	*ip will never hold the value 3, as the assignment is of the pointer, not the data contained within it; as such, ip ends up being the number 3, stored as a double, but interpreted as an integer, which will result in bad data.
 	3 is stored as 0x40400000 when stored as a double; this memory, as interpreted by a 2-byte integer would become 0x4040, which interpreted as an integer is 16448; clearly not equal to 3
+
+
+10. Page 407 exercise 8.16: Explain the meaning of the following C declarations:
+	a. double *a[n];
+	b. double (*b)[n];
+	c. double (*c[n])();
+	d. double (*d())[n];
+
+	a. Memory is cleared for a new array of "n" doubles, named "a"
+	b. Memory is cleared for a new pointer, named "b"; pointer "b" expects to be set to an array of "n" doubles, which does not yet exist
+	c. Memory is cleared for a new pointer, named "c"; pointer "c" expects to be set to a function that returns arrays of "n" pointers to doubles; this function does not yet exist.
+	d. A compilation error is produced, as hypothetical object "d" may not be defined by variable "n", as "d" is supposed to be a pointer to an array of "n" function pointers that return doubles, I think
 
 
