@@ -57,3 +57,45 @@ Are these loops equivalent? Explain.
 	That said, both loops call the same code; the first just gives more options to code down the line by preserving more information. That is not, however, considered equivalent.
 
 
+4. Page 291 exercise 6.33: Give an example in C in which an in-line subroutine may be significantly faster than a functionally equivalent macro. Give another example in which the macro is likely to be faster. (Hint: Think about applicative vs normalorder
+evaluation of arguments.
+
+	Example 1: An in-line subroutine would be significantly faster than an equivalent macro if the information is used repeatedly within a loop, especially if the information contains complex function calls that don't have side effects:
+	
+	int output = (x+3)%(y/3);
+	int arr[10000];
+	for(long i=0; i<arr.length; i++){
+		arr[i]=i%output;
+	}
+	
+	vs
+	
+	#DEFINE OUTPUT(A,B) ((A+3)%(B/3))
+	...
+	int arr[10000];
+	for(long i=0; i<arr.length; i++){
+		arr[i]=i%OUTPUT(x,y);
+	}
+	
+	Example 2: A macro expression would be significantly faster than an in-line subroutine if the code itself is expensive to run, such as printing something out to the console, and has a high chance of not needing to be called; or if a conditional statement's chance of running is determined at compile-time, and the conditional statement is called often, in which case it could be replaced with a conditional macro
+	
+	#DEFINE DEBUG_MODE false
+	...
+	for(int i=0; i<10000; i++){
+		int x = foo(i);
+		#IF DEBUG_MODE
+		printf("x=%d", x);
+		#ENDIF
+		...
+	}
+	
+	bool debug_mode = false;
+	...
+	for(int i=0; i<10000; i++){
+		int x = foo(i);
+		if(debug_mode)
+			printf("x=%d", x);
+		...
+	}
+
+
