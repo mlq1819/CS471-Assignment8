@@ -99,3 +99,21 @@ evaluation of arguments.
 	}
 
 
+5. Page 311/12 CYU 2, 9, 10:
+#2: What does it mean for a language to be strongly typed? Statically typed? What prevents, say, C from being strongly typed?
+	A language is strongly typed if it can meaningfully prohibit operations from being performed on objects of types that the operation is not programmed for; for instance, from performing an assignment operation between a character and a struct.
+	A language is statically typed if it is strongly typed and these checks to prevent operations between incompatible types can be performed at compile-time.
+	C is prevented from being strongly typed thanks to pointers, which can be cast as any other type of pointer (either directly or through void pointers), effectively allowing for casting any object as any other type of object without objection from the compiler. Therefore, C's typing is an imperfect tool, and can be easily violated without complaint from the machine (though it will still cause issues); effectively, C is too trusting of the programmer.
+
+#9: What is polymorphism? What distinguishes its parametric and subtype varieties? What are generics?
+	Polymorphism is the degree to which code can work (is designed to work) using multiple different types of objects.
+	Parametric polymorphism is polymorphism regarding function parameters; this includes both functions that is written to take multiple types of objects (such as int Math.pow(int, int) and double Math.pow(double, double)), and code that can take multiple types due to automatic casting (such as double fmod(double, double), which could take an integer for either parameter and cast it to a double).
+	Subtype Polymorphism is polymorphism regarding subtypes in object-oriented languages, such as subclasses; for instance, if someone wrote a Parent class, they could also write a Grandparent subclass of the Parent class, and any expression that allows a Parent would also allow a Grandparent in its place.
+	Generics are a case of "explicit parametric polymorphism," in which a function can take a wide range of parameter types provided they follow a specific "template" (for instance, any sort function just requires that the elements being sorted can be compared to one another; any arithmetic operator just requires that the elements are a type of number; etc.). Vectors are a well-suited example; they can hold elements of any type of object, provided that all of their elements are of that type of object.
+
+#10: What is the difference between discrete and scalar types?
+	A discrete object type is any object type that follows these two principles; they are either countably finite or countably infinite (either theoretically or in practice), and there is a defined "previous" and "next" for any element in the set aside from the "first" and "last" of the set, if applicable. For instance, integers, characters, and booleans are all discrete types; but irrational numbers would not be.
+	Scalar types are a larger grouping of types that includes discrete types, as well as rational and real numbers, and complex types; basically anything that doesn't contain a list or matrix of some sort; singular groupings of data rather than collections of data. Scalar data takes up a defined amount of memory, with a clear maximum space for each type.
+	All discrete data types are also scalar data types, but discrete data can be incremented and decremented using a preexisting "unit" that is defined by the type itself.
+
+
