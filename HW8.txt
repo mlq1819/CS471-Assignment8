@@ -143,3 +143,29 @@ State which variables are type equivalent under (a) structural equivalence, (b) 
 	c) The C algorithm will allow assignment from between any of them; but it will only identify b, c, and d as type equivalent
 
 
+9. Given the following C++ declaration,
+
+	double* dp = new double(3);
+	void* vp;
+	int* ip;
+
+Which of the following assignments does the compiler complain about?
+
+	vp = dp;
+	dp = vp;
+	ip = dp;
+	dp = ip;
+	ip = vp;
+
+	ip = (int*) vp;
+	ip = static_cast<int*>(vp);
+	ip = static_cast<int*>(dp);
+	ip = reinterpret_cast<int*>(dp);
+
+Briefly explain the behavior of the compiler.  Will *ip ever have the value 3 after one of the assignments to ip ?
+	The compiler will complain about any assignment which involves assigning vp to either dp or ip without a cast. It will also complain about any assignment from dp to ip and vise-versa without a cast.
+	The compiler will complain about assignment from vp because void pointers are a very broad and can contain point to any type of data, so it wants the user to be aware of this and explicitly tell it what it is supposed to be assigning to, as mistakes can be easily made otherwise. Regarding assigning from ip or dp to the other, it will also cause problems as doubles and ints are stored in different ways, so converting a pointer doesn't actually change the data stored, just how it's interpreted, which in the case of switching from an int or double pointer to the other results in inaccurate data.
+	*ip will never hold the value 3, as the assignment is of the pointer, not the data contained within it; as such, ip ends up being the number 3, stored as a double, but interpreted as an integer, which will result in bad data.
+	3 is stored as 0x40400000 when stored as a double; this memory, as interpreted by a 2-byte integer would become 0x4040, which interpreted as an integer is 16448; clearly not equal to 3
+
+
