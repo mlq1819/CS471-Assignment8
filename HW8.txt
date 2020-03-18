@@ -129,3 +129,17 @@ evaluation of arguments.
 	Now, the core method in which information is stored is the same between the two, and that technically, any information could be represented as an integer; however, C (and therefore C#) acknowledges and uses this in the language design, while Java chooses not to. The creators of Java did not want that sort of low-level programming, as Java is less trusting of its programmers than C is (and C#); therefore, they intentionally chose not to use this.
 
 
+8. Here are some type and variable declarations in C syntax:
+	typedef char* String1;
+	typedef char* String2:
+	
+	String1 a;
+	String2 b, c;
+	String2 d;
+
+State which variables are type equivalent under (a) structural equivalence, (b) strict name equivalence, and (c) the actual C equivalence algorithm.
+	a) a, b, c, and d are all type equivalent under structural equivalence; the structures they occupy are identical
+	b) a is of a different type from the others, but b, c, and d are all type equivalent; their names are the same
+	c) The C algorithm will allow assignment from between any of them; but it will only identify b, c, and d as type equivalent
+
+
