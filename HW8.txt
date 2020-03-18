@@ -123,3 +123,9 @@ evaluation of arguments.
 	Duck typing is the bread and butter of Prolog; but it also appears in Objective C, Swift, Python, and Ruby.
 
 
+7. Page 342 cyu 33: Why will C# accept int as a generic argument, but Java won’t?
+	C# is based off of C, a language in which every object that isn't a primitive can have a pointer attached to it. Since primitives are just integers that are interpreted differently, any primitive can be interpreted as an integer; and pointers are just integers that are interpreted as memory addresses to be referenced, but they can also be interpreted as integers. Therefore, any object in C# can be represented as an integer in some capacity; or more accurately, an integer can represent any type of object. Therefore, C# will allow int as a generic argument, since it can work.
+	Java, however, will not allow different types to be cast as integers; despite the fact that all information is either encoded as an integer in some capacity or is stored in at a memory address that could be, the language itself will not allow this information to be interpreted as such.
+	Now, the core method in which information is stored is the same between the two, and that technically, any information could be represented as an integer; however, C (and therefore C#) acknowledges and uses this in the language design, while Java chooses not to. The creators of Java did not want that sort of low-level programming, as Java is less trusting of its programmers than C is (and C#); therefore, they intentionally chose not to use this.
+
+
